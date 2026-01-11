@@ -134,9 +134,9 @@ export default function ServicesSection() {
     <section className=" relative py-14 md:py-24 overflow-hidden">
       {/* background glow */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-24 left-1/2 h-[360px] w-[760px] -translate-x-1/2 rounded-full bg-[#0A4767]/10 blur-3xl" />
-        <div className="absolute -bottom-28 right-10 h-[320px] w-[520px] rounded-full bg-[#C8A951]/12 blur-3xl" />
-        <div className="absolute inset-0 opacity-[0.05] [background-image:radial-gradient(#0D1927_1px,transparent_1px)] [background-size:22px_22px]" />
+        <div className="absolute -top-24 left-1/2 h-[360px] w-[760px] -translate-x-1/2 rounded-full" />
+        <div className="absolute -bottom-28 right-10 h-[320px] w-[520px] rounded-full " />
+        <div className="absolute inset-0 " />
       </div>
 
       <div className="mx-auto max-w-7xl px-4">

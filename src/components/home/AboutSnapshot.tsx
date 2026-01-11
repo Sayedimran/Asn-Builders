@@ -105,9 +105,9 @@ export default function AboutSnapshot() {
     <section className="relative isolate overflow-x-hidden py-14 md:py-24">
       {/* background layer */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-0 h-[260px] w-[560px] -translate-x-1/2 rounded-full bg-[#0A4767]/12 blur-3xl" />
-        <div className="absolute right-10 bottom-0 h-[220px] w-[420px] rounded-full bg-[#C8A951]/14 blur-3xl" />
-        <div className="absolute inset-0 opacity-[0.05] [background-image:radial-gradient(#0D1927_1px,transparent_1px)] [background-size:22px_22px]" />
+        <div className="absolute left-1/2 top-0 h-[260px] w-[560px] -translate-x-1/2 rounded-full" />
+        <div className="absolute right-10 bottom-0 h-[220px] w-[420px] rounded-full" />
+        <div className="absolute inset-0 " />
       </div>
 
       <div className="mx-auto max-w-7xl px-4">

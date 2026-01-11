@@ -7,7 +7,7 @@ import HeroStatsAnimated from "./HeroStatsAnimated";
 
 export default function Hero() {
   return (
-    <section className="hero-bg w-full mt-10">
+    <section className=" w-full mt-10">
       {/* full-width background */}
       <div className="mx-auto max-w-7xl px-4 py-12 md:py-20">
         {/* centered container */}
