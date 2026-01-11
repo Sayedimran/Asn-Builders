@@ -27,7 +27,7 @@ function formatValue(value: number, format?: "normal" | "k") {
 function CountUp({
   to,
   start,
-  duration = 900,
+  duration = 3000,
   suffix = "",
   format = "normal",
 }: {
@@ -83,7 +83,7 @@ export default function HeroStatsAnimated() {
               suffix={s.suffix}
               format={s.format}
               start={inView}
-              duration={900}
+              duration={1500}
             />
           </div>
           <div className="text-slate-500">{s.label}</div>
