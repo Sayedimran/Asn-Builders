@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import HeroImageCarousel from "../ui/HeroImageCarousel";
+import HeroStatsAnimated from "./HeroStatsAnimated";
 
 export default function Hero() {
   return (
@@ -41,26 +42,8 @@ export default function Hero() {
             </p>
 
             {/* STATS */}
-            <div className="mt-6 grid grid-cols-3 gap-6 text-sm ">
-              <div>
-                <div className="font-heading text-xl font-semibold text-[#0D1927]">
-                  12+
-                </div>
-                <div className="text-slate-500">Years</div>
-              </div>
-              <div>
-                <div className="font-heading text-xl font-semibold text-[#0D1927]">
-                  45+
-                </div>
-                <div className="text-slate-500">Projects</div>
-              </div>
-              <div>
-                <div className="font-heading text-xl font-semibold text-[#0D1927]">
-                  2k+
-                </div>
-                <div className="text-slate-500">Clients</div>
-              </div>
-            </div>
+            
+            <HeroStatsAnimated />
 
             {/* CTA */}
             <div className="mt-8 flex flex-wrap gap-4">
