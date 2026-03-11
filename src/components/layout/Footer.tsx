@@ -99,7 +99,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <p className="mt-4 max-w-md text-sm leading-6 text-white/70">
+            <p className="mt-4 max-w-md text-sm leading-6 footer-p ">
               We build premium residential & commercial projects with quality
               materials, transparent communication, and on-time delivery.
             </p>

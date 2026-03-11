@@ -3,6 +3,13 @@
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import { useMemo } from "react";
+import {
+  ArrowRight,
+  Check,
+  ShieldCheck,
+  Phone,
+  MessageCircleMore,
+} from "lucide-react";
 
 const points = [
   {
@@ -13,74 +20,6 @@ const points = [
   { title: "Expert Team", desc: "Skilled engineers & strong supervision" },
   { title: "Safe Handover", desc: "Compliance-focused, on-time delivery" },
 ];
-
-/** Small icons (no library needed) */
-function IconArrowRight() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
-      <path
-        d="M5 12h12"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M13 6l6 6-6 6"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-function IconWhatsApp() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
-      <path
-        fill="currentColor"
-        d="M20.52 3.48A11.88 11.88 0 0 0 12.02 0C5.4 0 .04 5.36.04 11.98c0 2.11.55 4.17 1.6 5.99L0 24l6.2-1.62a11.9 11.9 0 0 0 5.8 1.48h.01c6.62 0 11.98-5.36 11.98-11.98 0-3.2-1.25-6.2-3.47-8.4Zm-8.5 18.36h-.01a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.68.96.98-3.59-.23-.37a9.94 9.94 0 0 1-1.52-5.27C2.17 6.46 6.5 2.13 12.03 2.13c2.63 0 5.1 1.03 6.96 2.9a9.77 9.77 0 0 1 2.88 6.95c0 5.53-4.33 9.86-9.85 9.86Zm5.4-7.38c-.3-.15-1.78-.87-2.05-.97-.27-.1-.47-.15-.66.15-.2.3-.76.97-.93 1.17-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.74-1.64-2.04-.17-.3-.02-.46.13-.61.13-.13.3-.34.44-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.66-1.6-.9-2.19-.24-.58-.48-.5-.66-.51h-.56c-.2 0-.52.07-.8.37-.27.3-1.05 1.03-1.05 2.51 0 1.48 1.08 2.92 1.23 3.12.15.2 2.13 3.25 5.17 4.56.72.31 1.28.5 1.72.64.72.23 1.37.2 1.88.12.57-.09 1.78-.73 2.03-1.44.25-.71.25-1.31.18-1.44-.07-.13-.27-.2-.57-.35Z"
-      />
-    </svg>
-  );
-}
-function IconShieldCheck() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
-      <path
-        d="M12 2 20 6v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6l8-4Z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M8.5 12.2 10.7 14.4 15.6 9.6"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-function IconCheck() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
-      <path
-        d="M20 6 9 17l-5-5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 16 },
@@ -95,19 +34,21 @@ export default function AboutSnapshot() {
   const waLink = useMemo(
     () =>
       `https://wa.me/8801708135425?text=${encodeURIComponent(
-        "Hello ASN Builders! I want to know about your projects and pricing."
+        "Hello ASN Builders! I want to know about your projects and pricing.",
       )}`,
-    []
+    [],
   );
 
   return (
-    // ✅ overflow-x-hidden fixes the mobile bottom scroll bar
-    <section className="relative isolate overflow-x-hidden py-14 md:py-24">
+    <section
+      id="about"
+      className="relative isolate overflow-x-hidden py-14 md:py-24"
+    >
       {/* background layer */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-0 h-[260px] w-[560px] -translate-x-1/2 rounded-full" />
         <div className="absolute right-10 bottom-0 h-[220px] w-[420px] rounded-full" />
-        <div className="absolute inset-0 " />
+        <div className="absolute inset-0" />
       </div>
 
       <div className="mx-auto max-w-7xl px-4">
@@ -151,8 +92,9 @@ export default function AboutSnapshot() {
                 >
                   <div className="flex items-start gap-3">
                     <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-[#0A4767]/10 text-[#0A4767]">
-                      <IconCheck />
+                      <Check className="h-4 w-4" />
                     </span>
+
                     <div>
                       <div className="text-sm font-bold text-[#0D1927]">
                         {p.title}
@@ -176,7 +118,7 @@ export default function AboutSnapshot() {
                   href="/about"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-[#0D1927] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-black/10 hover:brightness-110 transition"
                 >
-                  Learn More <IconArrowRight />
+                  Learn More <ArrowRight className="h-4 w-4" />
                 </Link>
               </motion.div>
 
@@ -187,7 +129,7 @@ export default function AboutSnapshot() {
                   className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-black/10 bg-white px-6 py-3 text-sm font-semibold text-slate-800 hover:bg-slate-50 transition"
                 >
                   <span className="text-[#25D366]">
-                    <IconWhatsApp />
+                    <MessageCircleMore className="h-4 w-4" />
                   </span>
                   WhatsApp
                 </a>
@@ -195,7 +137,7 @@ export default function AboutSnapshot() {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT IMAGE CARD — FIXED (no overflow-x) */}
+          {/* RIGHT IMAGE CARD */}
           <motion.div
             initial={{ opacity: 0, y: 18, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -203,7 +145,7 @@ export default function AboutSnapshot() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="relative"
           >
-            {/* ✅ glow (NO negative inset) */}
+            {/* glow */}
             <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-[44px]">
               <div className="absolute left-1/2 top-1/2 h-[260px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-[#0A4767]/18 via-transparent to-[#C8A951]/18 blur-3xl scale-[1.25]" />
             </div>
@@ -232,7 +174,7 @@ export default function AboutSnapshot() {
                   <div className="absolute left-3 right-3 top-3 flex justify-between flex-wrap items-center gap-2">
                     <span className="inline-flex items-center gap-2 rounded-full border border-black/5 bg-white/90 px-3 py-1 text-xs font-bold text-[#0D1927] shadow-sm backdrop-blur">
                       <span className="text-emerald-600">
-                        <IconShieldCheck />
+                        <ShieldCheck className="h-4 w-4" />
                       </span>
                       Verified Developer
                     </span>
@@ -276,7 +218,7 @@ export default function AboutSnapshot() {
                         </div>
 
                         <span className="grid h-10 w-10 place-items-center rounded-2xl bg-emerald-500/12 text-emerald-600 transition group-hover:bg-emerald-500/18">
-                          <IconWhatsApp />
+                          <Phone className="h-5 w-5" />
                         </span>
                       </div>
                     </a>
@@ -291,7 +233,7 @@ export default function AboutSnapshot() {
 
                   <span className="inline-flex w-fit items-center gap-2 rounded-full border border-black/5 bg-white px-3 py-1 text-xs font-bold text-slate-800">
                     <span className="text-emerald-600">
-                      <IconShieldCheck />
+                      <ShieldCheck className="h-4 w-4" />
                     </span>
                     Quality Checked
                   </span>

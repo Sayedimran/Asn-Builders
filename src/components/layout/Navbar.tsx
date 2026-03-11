@@ -8,9 +8,10 @@ import { AnimatePresence, motion } from "framer-motion";
 type NavItem = { label: string; href: string };
 
 const centerLinks: NavItem[] = [
-  { label: "About us", href: "/about" },
-  { label: "Projects", href: "/projects" },
-  { label: "Services", href: "/services" },
+  {label: "Home" , href:"/#hero"},
+  { label: "Services", href: "/#services" },
+  { label: "About us", href: "/#about" },
+  { label: "Projects", href: "/#projects" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -83,7 +84,7 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
     >
-      <div className="mx-auto max-w-7xl px-3 sm:px-4 py-3">
+      <div className="mx-auto max-w-7xl px-3 sm:px-4 mt-2 ">
         <motion.div
           className="rounded-3xl border border-black/5 bg-white/70 backdrop-blur"
           animate={{

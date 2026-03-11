@@ -7,7 +7,7 @@
   /* Core colors */
   --color-bg: #f5f6f7;
   /* off white */
-  --color-text: #b6b6b6;
+  --color-text: #040101;
   /* dark slate */
 
   --color-primary: #0d1927;
@@ -26,6 +26,9 @@
   --font-heading: var(--font-poppins);
 }
 
+html {
+  scroll-behavior: smooth;
+}
 /* =========================
    Base Reset & Body
 ========================= */
@@ -82,6 +85,8 @@ p {
   color: var(--color-text);
 }
 
+
+
 a {
   
   text-decoration: none;
@@ -115,6 +120,9 @@ img {
   padding-inline: 1rem;
 }
 
+.footer-p{
+  color: #e2e8f0;
+}
 .text-muted {
   color: var(--color-muted);
 }
