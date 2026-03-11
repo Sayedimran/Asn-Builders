@@ -4,34 +4,34 @@ import { motion } from "framer-motion";
 import HeroImageCarousel from "../ui/HeroImageCarousel";
 import HeroStatsAnimated from "./HeroStatsAnimated";
 
-
 export default function Hero() {
   return (
-    <section id="hero" className="relative w-full overflow-hidden min-h-[660px] md:min-h-[940px]">
-      
-      {/* ✅ Desktop Video Background ONLY */}
-      <div className="pointer-events-none absolute inset-0 -z-10 hidden md:block">
+    <section
+      id="hero"
+      className="relative w-full overflow-hidden min-h-[660px] md:min-h-[940px]"
+    >
+      {/* ✅ Desktop Video Background */}
+      <div className="pointer-events-none absolute inset-0 z-0 hidden md:block">
         <video
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           className="h-full w-full object-cover"
-          
         >
           <source src="/Video/hero.mp4" type="video/mp4" />
         </video>
 
-        
-        
+        {/* ✅ overlay (so content readable) */}
+        <div className="absolute inset-0 bg-gradient-to-b " />
       </div>
 
       {/* ✅ Mobile background (NO video) */}
-      <div className="pointer-events-none absolute inset-0 -z-10 md:hidden bg-[radial-gradient(900px_520px_at_18%_30%,rgba(200,169,81,0.10),transparent_60%),linear-gradient(to_bottom,#f8fafc,#ffffff)]" />
+      <div className="pointer-events-none absolute inset-0 z-0 md:hidden bg-[radial-gradient(900px_520px_at_18%_30%,rgba(200,169,81,0.10),transparent_60%),linear-gradient(to_bottom,#f8fafc,#ffffff)]" />
 
-      {/* Content */}
-      <div className="mx-auto max-w-7xl px-4  md:py-20">
+      {/* ✅ Content should be ABOVE video */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 md:py-20">
         <div className="relative grid items-center gap-12 lg:grid-cols-2">
           {/* TEXT COLUMN */}
           <motion.div
@@ -74,7 +74,7 @@ export default function Hero() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="relative mx-auto w-full"
           >
-            <div className="rounded-[28px]    p-3">
+            <div className="rounded-[28px] p-3">
               <HeroImageCarousel />
             </div>
 
