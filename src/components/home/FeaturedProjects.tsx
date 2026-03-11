@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { projects } from "@/src/data/projects";
+import { projects, type Project } from "@/src/data/projects";
 
 const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -24,7 +24,7 @@ function StatusPill({ status }: { status: Project["status"] }) {
       className={[
         "inline-flex items-center rounded-full border px-3 py-1",
         "text-[11px] font-extrabold shadow-sm",
-        "bg-white/70 backdrop-blur", // ✅ glass
+        "bg-white/70 backdrop-blur",
         cls,
       ].join(" ")}
     >
@@ -89,7 +89,6 @@ export default function FeaturedProjects() {
                 "border border-black/5 bg-white/70 backdrop-blur",
                 "shadow-sm transition",
                 "hover:-translate-y-0.5 hover:shadow-[0_26px_70px_rgba(2,6,23,0.12)]",
-                // ✅ subtle outline glow
                 "hover:ring-1 hover:ring-[#0A4767]/20",
               ].join(" ")}
             >
@@ -103,10 +102,9 @@ export default function FeaturedProjects() {
                   decoding="async"
                 />
 
-                {/* ✅ overlay কমানো হলো (image clear) */}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-black/0 to-transparent" />
 
-                {/* TOP BADGES (glass) */}
+                {/* TOP BADGES */}
                 <div className="absolute left-3 right-3 top-3 flex items-center justify-between gap-2">
                   <StatusPill status={p.status} />
 
@@ -127,7 +125,7 @@ export default function FeaturedProjects() {
                   )}
                 </div>
 
-                {/* ✅ BOTTOM TITLE BAR (separate, premium) */}
+                {/* BOTTOM TITLE BAR */}
                 <div className="absolute bottom-3 left-3 right-3">
                   <div className="rounded-2xl border border-white/20 bg-white/85 px-4 py-3 shadow-lg shadow-black/10 backdrop-blur">
                     <div className="text-base font-extrabold text-[#0D1927] leading-snug">
@@ -145,7 +143,7 @@ export default function FeaturedProjects() {
               {/* FOOTER */}
               <div className="p-5">
                 <Link
-                  href={p.slug}
+                  href={`/projects/${p.slug}`}
                   className={[
                     "inline-flex w-full items-center justify-center rounded-2xl",
                     "bg-[#0D1927] px-4 py-2.5 text-sm font-semibold text-white",
