@@ -25,7 +25,7 @@ export default function Hero() {
         </video>
 
         {/* ✅ FIX: real overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/35 via-white/10 to-white/70" />
+        <div className="absolute inset-0 " />
       </div>
 
       {/* ✅ Mobile background (NO video) */}
