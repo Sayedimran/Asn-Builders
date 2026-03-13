@@ -20,20 +20,21 @@ export default function Hero() {
           preload="auto"
           className="h-full w-full object-cover"
         >
-          <source src="/Video/hero.mp4" type="video/mp4" />
+          {/* ✅ FIX: folder name is /video (lowercase) */}
+          <source src="/video/hero.mp4" type="video/mp4" />
         </video>
 
-        {/* ✅ overlay (so content readable) */}
-        <div className="absolute inset-0 bg-gradient-to-b " />
+        {/* ✅ FIX: real overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/35 via-white/10 to-white/70" />
       </div>
 
       {/* ✅ Mobile background (NO video) */}
       <div className="pointer-events-none absolute inset-0 z-0 md:hidden bg-[radial-gradient(900px_520px_at_18%_30%,rgba(200,169,81,0.10),transparent_60%),linear-gradient(to_bottom,#f8fafc,#ffffff)]" />
 
-      {/* ✅ Content should be ABOVE video */}
+      {/* ✅ Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 md:py-20">
         <div className="relative grid items-center gap-12 lg:grid-cols-2">
-          {/* TEXT COLUMN */}
+          {/* TEXT */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -67,7 +68,7 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* IMAGE COLUMN */}
+          {/* IMAGE */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
