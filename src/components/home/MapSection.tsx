@@ -1,9 +1,9 @@
 "use client";
 
 export default function MapSection() {
-  // Savar, Dhaka, Bangladesh (Google Maps embed)
+  // ASN Builders office location (Masjid Market, Bank Town, Savar, Dhaka)
   const mapSrc =
-    "https://www.google.com/maps?q=Savar%2C%20Dhaka%2C%20Bangladesh&output=embed";
+    "https://www.google.com/maps?q=Masjid%20Market%2C%20Bank%20Town%2C%20Savar%2C%20Dhaka&output=embed";
 
   return (
     <section className="bg-white">
@@ -20,13 +20,13 @@ export default function MapSection() {
               Visit Our Office
             </h2>
             <p className="mt-2 max-w-2xl text-slate-500">
-              Dhaka, Savar, Bangladesh — site visit & meeting schedule
-              available.
+              Masjid Market, Bank Town, Savar, Dhaka — site visit & meeting
+              schedule available.
             </p>
           </div>
 
           <a
-            href="https://www.google.com/maps?q=Savar,+Dhaka,+Bangladesh"
+            href="https://www.google.com/maps?q=Masjid+Market,+Bank+Town,+Savar,+Dhaka"
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800"
@@ -51,7 +51,7 @@ export default function MapSection() {
           <div className="flex flex-col gap-3 border-t border-slate-200 p-5 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-sm font-semibold text-slate-900">
-                Dhaka • Savar • Bangladesh
+                Masjid Market • Bank Town • Savar • Dhaka
               </p>
               <p className="text-sm text-slate-500">
                 For directions & site visit, open the map or contact us.
@@ -60,7 +60,7 @@ export default function MapSection() {
 
             <div className="flex gap-3">
               <a
-                href="https://www.google.com/maps/dir/?api=1&destination=Savar%2C%20Dhaka%2C%20Bangladesh"
+                href="https://www.google.com/maps/dir/?api=1&destination=Masjid%20Market%2C%20Bank%20Town%2C%20Savar%2C%20Dhaka"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50"

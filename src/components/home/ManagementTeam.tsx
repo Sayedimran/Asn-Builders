@@ -137,13 +137,13 @@ export default function ManagementTeam({
   };
 
   return (
-    <section className="relative w-full py-12 md:py-16">
+    <section className="relative w-full py-5 md:py-16">
       {/* background */}
       
 
       <div className="mx-auto w-full max-w-7xl px-4">
         {/* heading */}
-        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div className="flex flex-col  gap-3 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
@@ -169,7 +169,7 @@ export default function ManagementTeam({
 
         {/* carousel */}
         <div
-          className="mt-7"
+          className="mt-5"
           onMouseEnter={() => setIsHoveringCarousel(true)}
           onMouseLeave={() => setIsHoveringCarousel(false)}
         >
@@ -180,7 +180,7 @@ export default function ManagementTeam({
             <div
               ref={trackRef}
               className="
-                flex snap-x snap-mandatory gap-3 sm:gap-4
+                flex  snap-x snap-mandatory gap-3 sm:gap-4
                 overflow-x-auto scroll-smooth pb-3
                 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
               "

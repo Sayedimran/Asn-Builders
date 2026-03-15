@@ -1,18 +1,18 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown, Menu, X } from "lucide-react";
 
 type NavItem = { label: string; href: string };
 
 const centerLinks: NavItem[] = [
-  {label: "Home" , href:"/#hero"},
+  { label: "Home", href: "/#hero" },
   { label: "Services", href: "/#services" },
   { label: "About us", href: "/#about" },
   { label: "Projects", href: "/#projects" },
-  { label: "Contact", href: "/contact" },
+  
 ];
 
 const dropdownLinks: NavItem[] = [
@@ -20,11 +20,6 @@ const dropdownLinks: NavItem[] = [
   { label: "Interior Design", href: "/services#interior" },
   { label: "Consultancy", href: "/services#consultancy" },
 ];
-
-function isActive(pathname: string, href: string) {
-  if (href === "/") return pathname === "/";
-  return pathname.startsWith(href);
-}
 
 const dropVariants = {
   hidden: { opacity: 0, y: 10, scale: 0.98 },
@@ -38,17 +33,32 @@ const mobileVariants = {
   exit: { height: 0, opacity: 0 },
 };
 
+function scrollToId(id: string) {
+  if (!id) return;
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  // sticky header offset (approx)
+  const headerOffset = 92;
+  const top = el.getBoundingClientRect().top + window.scrollY - headerOffset;
+  window.scrollTo({ top, behavior: "smooth" });
+}
+
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
 
   const [openMobile, setOpenMobile] = useState(false);
   const [openDrop, setOpenDrop] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  // for reliable hash scroll after route change
+  const [pendingHash, setPendingHash] = useState<string | null>(null);
+
   const dropRef = useRef<HTMLDivElement | null>(null);
   const mobileWrapRef = useRef<HTMLDivElement | null>(null);
 
-  // Scroll effect (more visible)
+  // shadow on scroll
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
@@ -56,7 +66,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Outside click close
+  // outside click close
   useEffect(() => {
     const onDocClick = (e: MouseEvent) => {
       const target = e.target as Node;
@@ -66,16 +76,66 @@ export default function Navbar() {
       if (mobileWrapRef.current && !mobileWrapRef.current.contains(target))
         setOpenMobile(false);
     };
-
     document.addEventListener("mousedown", onDocClick);
     return () => document.removeEventListener("mousedown", onDocClick);
   }, []);
 
-  // Route change -> close
+  // esc close
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpenDrop(false);
+        setOpenMobile(false);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
+
+  // route change -> close menus
   useEffect(() => {
     setOpenMobile(false);
     setOpenDrop(false);
   }, [pathname]);
+
+  // after navigation, perform pending hash scroll
+  useEffect(() => {
+    if (!pendingHash) return;
+    if (pathname !== "/") return;
+
+    const t = setTimeout(() => {
+      scrollToId(pendingHash);
+      setPendingHash(null);
+    }, 120);
+
+    return () => clearTimeout(t);
+  }, [pendingHash, pathname]);
+
+  // ✅ smooth navigation for hash links
+  const goTo = (href: string) => {
+    setOpenMobile(false);
+    setOpenDrop(false);
+
+    // normal page route
+    if (!href.includes("#")) {
+      router.push(href);
+      return;
+    }
+
+    const [pathPart, hashPart] = href.split("#");
+    const targetPath = pathPart?.length ? pathPart : "/";
+    const targetHash = hashPart || "";
+
+    // if already on home, just scroll
+    if (targetPath === "/" && pathname === "/") {
+      scrollToId(targetHash);
+      return;
+    }
+
+    // go to page then scroll
+    setPendingHash(targetHash);
+    router.push(targetPath);
+  };
 
   return (
     <motion.header
@@ -84,7 +144,7 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
     >
-      <div className="mx-auto max-w-7xl px-3 sm:px-4 mt-2 ">
+      <div className="mx-auto max-w-7xl px-3 sm:px-4 pt-2">
         <motion.div
           className="rounded-3xl border border-black/5 bg-white/70 backdrop-blur"
           animate={{
@@ -94,88 +154,56 @@ export default function Navbar() {
             backgroundColor: scrolled
               ? "rgba(255,255,255,0.92)"
               : "rgba(255,255,255,0.72)",
-            y: scrolled ? 0 : 0,
           }}
           transition={{ duration: 0.22, ease: "easeOut" }}
         >
           {/* ROW */}
-          <div className="flex h-16 items-center justify-between gap-3 px-4">
-            {/* LOGO */}
-            <Link href="/" className="flex items-center gap-2">
-              <span className="grid h-9 w-9 place-items-center rounded-xl bg-[#0D1927] text-white text-xs font-extrabold">
-                ASN
-              </span>
-              <span className="font-heading text-sm font-semibold text-[#0D1927]">
-                ASN Builders
-              </span>
-            </Link>
+          <div className="flex h-[74px] items-center justify-between gap-3 px-4">
+            {/* LOGO (bigger + stable) */}
+            <button
+              type="button"
+              onClick={() => goTo("/#hero")}
+              className="flex items-center"
+              aria-label="Go to Home"
+            >
+              <img
+                src="/logo/logo.png"
+                alt="A.S.N Builders & Consultant Ltd."
+                className="  w-[370] object-contain"
+               
+              />
+            </button>
 
             {/* CENTER DESKTOP */}
             <nav className="hidden lg:flex items-center gap-1">
-              {centerLinks.map((l) => {
-                const active = isActive(pathname, l.href);
-                return (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    className={[
-                      "rounded-xl px-3 py-2 text-sm font-medium transition",
-                      active
-                        ? "bg-slate-100 text-[#0D1927]"
-                        : "text-black hover:text-[#5514a4] hover:bg-slate-50",
-                    ].join(" ")}
-                  >
-                    {l.label}
-                  </Link>
-                );
-              })}
+              {centerLinks.map((l) => (
+                <button
+                  key={l.href}
+                  type="button"
+                  onClick={() => goTo(l.href)}
+                  className="whitespace-nowrap rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 hover:text-[#0D1927] hover:bg-slate-50 transition"
+                >
+                  {l.label}
+                </button>
+              ))}
             </nav>
 
             {/* RIGHT DESKTOP */}
             <div className="hidden lg:flex items-center gap-2">
-              {/* Search */}
-              <motion.button
-                type="button"
-                whileTap={{ scale: 0.96 }}
-                whileHover={{ y: -1 }}
-                aria-label="Search"
-                className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition"
-                onClick={() => console.log("Search clicked")}
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"
-                    stroke="#0D1927"
-                    strokeWidth="2"
-                  />
-                  <path
-                    d="M16.5 16.5 21 21"
-                    stroke="#0D1927"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </motion.button>
-
               {/* Dropdown */}
               <div className="relative" ref={dropRef}>
-                <motion.button
+                <button
                   type="button"
-                  whileTap={{ scale: 0.98 }}
                   onClick={() => setOpenDrop((v) => !v)}
-                  className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-600 hover:text-[#0D1927] hover:bg-slate-50 transition"
+                  className="whitespace-nowrap inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 hover:text-[#0D1927] hover:bg-slate-50 transition"
                   aria-expanded={openDrop}
                   aria-haspopup="menu"
                 >
                   Other services
-                  <motion.span
-                    animate={{ rotate: openDrop ? 180 : 0 }}
-                    transition={{ duration: 0.18 }}
-                    className="text-slate-500"
-                  >
-                    ▾
-                  </motion.span>
-                </motion.button>
+                  <ChevronDown
+                    className={`h-4 w-4 transition ${openDrop ? "rotate-180" : ""}`}
+                  />
+                </button>
 
                 <AnimatePresence mode="wait">
                   {openDrop && (
@@ -190,15 +218,15 @@ export default function Navbar() {
                       role="menu"
                     >
                       {dropdownLinks.map((d) => (
-                        <Link
+                        <button
                           key={d.href}
-                          href={d.href}
-                          onClick={() => setOpenDrop(false)}
-                          className="block rounded-xl px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                          type="button"
+                          onClick={() => goTo(d.href)}
+                          className="block w-full text-left rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
                           role="menuitem"
                         >
                           {d.label}
-                        </Link>
+                        </button>
                       ))}
                     </motion.div>
                   )}
@@ -206,27 +234,29 @@ export default function Navbar() {
               </div>
 
               {/* CTA */}
-              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-                <Link
-                  href="/contact"
-                  className="rounded-2xl bg-[#0D1927] text-white px-4 py-2 text-sm font-semibold   shadow-lg shadow-black/10 transition"
-                >
-                  Contact us
-                </Link>
-              </motion.div>
+              <button
+                type="button"
+                onClick={() => goTo("/contact")}
+                className="whitespace-nowrap rounded-2xl bg-[#0D1927] text-white px-4 py-2 text-sm font-semibold shadow-lg shadow-black/10 transition hover:brightness-110"
+              >
+                Contact us
+              </button>
             </div>
 
             {/* MOBILE TOGGLE */}
-            <motion.button
+            <button
               type="button"
-              whileTap={{ scale: 0.96 }}
               className="lg:hidden grid h-11 w-11 place-items-center rounded-xl border border-slate-200 bg-white/90"
-              aria-label="Open menu"
+              aria-label={openMobile ? "Close menu" : "Open menu"}
               aria-expanded={openMobile}
               onClick={() => setOpenMobile((v) => !v)}
             >
-              <span className="text-lg">{openMobile ? "✕" : "☰"}</span>
-            </motion.button>
+              {openMobile ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </button>
           </div>
 
           {/* MOBILE MENU */}
@@ -244,24 +274,16 @@ export default function Navbar() {
               >
                 <div className="px-4 pb-4 pt-3">
                   <div className="grid gap-2">
-                    {centerLinks.map((l) => {
-                      const active = isActive(pathname, l.href);
-                      return (
-                        <Link
-                          key={l.href}
-                          href={l.href}
-                          onClick={() => setOpenMobile(false)}
-                          className={[
-                            "rounded-xl px-4 py-3 text-sm font-semibold transition",
-                            active
-                              ? "bg-slate-100 text-[#0D1927]"
-                              : "text-slate-700 hover:bg-slate-50",
-                          ].join(" ")}
-                        >
-                          {l.label}
-                        </Link>
-                      );
-                    })}
+                    {centerLinks.map((l) => (
+                      <button
+                        key={l.href}
+                        type="button"
+                        onClick={() => goTo(l.href)}
+                        className="text-left rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
+                      >
+                        {l.label}
+                      </button>
+                    ))}
                   </div>
 
                   <div className="mt-3 rounded-2xl bg-slate-50 p-3">
@@ -270,33 +292,33 @@ export default function Navbar() {
                     </div>
                     <div className="mt-2 grid gap-1">
                       {dropdownLinks.map((d) => (
-                        <Link
+                        <button
                           key={d.href}
-                          href={d.href}
-                          onClick={() => setOpenMobile(false)}
-                          className="rounded-xl px-3 py-2 text-sm text-slate-700 hover:bg-white"
+                          type="button"
+                          onClick={() => goTo(d.href)}
+                          className="text-left rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-white"
                         >
                           {d.label}
-                        </Link>
+                        </button>
                       ))}
                     </div>
                   </div>
 
                   <div className="mt-3 grid grid-cols-2 gap-3">
-                    <Link
-                      href="/projects"
-                      onClick={() => setOpenMobile(false)}
+                    <button
+                      type="button"
+                      onClick={() => goTo("/projects")}
                       className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-center text-sm font-semibold text-slate-700 shadow-sm"
                     >
                       View Projects
-                    </Link>
-                    <Link
-                      href="/contact"
-                      onClick={() => setOpenMobile(false)}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => goTo("/contact")}
                       className="w-full rounded-xl bg-[#0D1927] px-4 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-black/10"
                     >
                       Contact us
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </motion.div>

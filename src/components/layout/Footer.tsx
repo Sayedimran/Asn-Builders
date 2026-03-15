@@ -86,28 +86,33 @@ export default function Footer() {
             custom={0}
           >
             <div className="flex items-center gap-3">
-              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/10 text-white font-extrabold">
-                ASN
+              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/75 text-white font-extrabold">
+                <img
+                  src="/logo/logo1.png"
+                  alt="A.S.N Builders & Consultant Ltd."
+                  className="  w-[370] object-contain"
+                />
               </span>
               <div>
                 <div className="font-heading text-lg font-semibold text-white">
                   ASN Builders
                 </div>
                 <div className="text-sm text-white/60">
-                  Real Estate & Construction in Bangladesh
+                  Builders & Consultant Ltd. in Bangladesh
                 </div>
               </div>
             </div>
 
             <p className="mt-4 max-w-md text-sm leading-6 footer-p ">
-              We build premium residential & commercial projects with quality
-              materials, transparent communication, and on-time delivery.
+              We provide design, soil test, digital survey, architectural plan,
+              structural design, estimation, 3D view, interior design, master
+              plan, site supervision, construction, and plan approval services.
             </p>
 
             <div className="mt-4 flex flex-wrap gap-2">
-              <Badge>Trusted Developer</Badge>
-              <Badge>On-time Delivery</Badge>
-              <Badge>Quality Materials</Badge>
+              <Badge>Design & Planning</Badge>
+              <Badge>Construction Support</Badge>
+              <Badge>Plan Approval</Badge>
             </div>
 
             {/* Social */}
@@ -115,8 +120,8 @@ export default function Footer() {
               <motion.a
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                href={`https://wa.me/8801708135425?text=${encodeURIComponent(
-                  "Hello ASN Builders! I want to know about your projects and pricing."
+                href={`https://wa.me/8801925263859?text=${encodeURIComponent(
+                  "Hello ASN Builders! I want to know about your services and projects.",
                 )}`}
                 target="_blank"
                 className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white/85 hover:bg-white/10 transition"
@@ -183,9 +188,12 @@ export default function Footer() {
             <div className="text-sm font-semibold text-white">Services</div>
             <ul className="mt-4 space-y-3 text-sm underline">
               {[
+                {
+                  label: "Design & Planning",
+                  href: "/services#design-planning",
+                },
                 { label: "Construction", href: "/services#construction" },
-                { label: "Interior Design", href: "/services#interior" },
-                { label: "Consultancy", href: "/services#consultancy" },
+                { label: "Interior Design", href: "/services#interior-design" },
               ].map((i) => (
                 <li key={i.href}>
                   <Link
@@ -212,33 +220,33 @@ export default function Footer() {
 
             <div className="mt-4 space-y-3 text-sm text-white/75">
               <a
-                href="tel:+8801708135425"
+                href="tel:+8801925263859"
                 className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition"
               >
                 <span className="text-white/90">
                   <IconPhone />
                 </span>
                 <span className="font-semibold group-hover:text-white transition">
-                  +880 1708-135425
+                  +880 1925-263859
                 </span>
               </a>
 
               <a
-                href="mailto:info@asnbuilders.com"
-                className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition"
+                href="mailto:asnbuildersconsultant@gmail.com"
+                className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-1.5 py-3 hover:bg-white/10 transition"
               >
                 <span className="text-white/90">
                   <IconMail />
                 </span>
                 <span className="font-semibold group-hover:text-white transition">
-                  info@asnbuilders.com
+                  asnbuildersconsultant@gmail.com
                 </span>
               </a>
 
               <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
                 <div className="text-white/55 text-xs">Office</div>
                 <div className="font-semibold text-white/85">
-                  Dhaka, Bangladesh
+                  Masjid Market, Bank Town, Savar, Dhaka
                 </div>
               </div>
             </div>

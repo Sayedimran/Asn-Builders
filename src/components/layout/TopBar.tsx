@@ -72,10 +72,10 @@ export default function TopBar() {
                 <Dot />
                 <span className="font-semibold text-white">Call:</span>
                 <Link
-                  href="tel:+8801708135425"
+                  href="tel:+8801925263859"
                   className="!text-white/80 !visited:text-white font-semibold underline-offset-4 hover:underline hover:!text-[#C8A951] transition"
                 >
-                  +880 1708-135425
+                  +880 1925-263859
                 </Link>
               </div>
 
@@ -85,10 +85,10 @@ export default function TopBar() {
                 <Dot />
                 <span className="font-semibold text-white">Email:</span>
                 <Link
-                  href="mailto:info@asnbuilders.com"
+                  href="mailto:asnbuildersconsultant@gmail.com"
                   className="!text-white/80 !visited:text-white font-semibold underline-offset-4 hover:underline hover:!text-[#C8A951] transition"
                 >
-                  info@asnbuilders.com
+                  asnbuildersconsultant@gmail.com
                 </Link>
               </div>
 
@@ -97,7 +97,9 @@ export default function TopBar() {
               <div className="flex items-center gap-2">
                 <Dot />
                 <span className="font-semibold text-white">Office:</span>
-                <span className="text-white/85">Dhaka, Bangladesh</span>
+                <span className="text-white/85">
+                  Masjid Market, Bank Town, Savar, Dhaka
+                </span>
               </div>
             </motion.div>
 
@@ -110,8 +112,8 @@ export default function TopBar() {
             >
               <motion.div whileHover={{ y: -1 }} whileTap={{ scale: 0.98 }}>
                 <Link
-                  href={`https://wa.me/8801708135425?text=${encodeURIComponent(
-                    "Hello ASN Builders! I want to know about your projects and pricing."
+                  href={`https://wa.me/8801925263859?text=${encodeURIComponent(
+                    "Hello ASN Builders! I want to know about your projects and pricing.",
                   )}`}
                   target="_blank"
                   aria-label="WhatsApp"
